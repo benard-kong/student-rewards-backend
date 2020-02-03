@@ -1,0 +1,8 @@
+{
+  "ext": "js, graphql",
+  "ignore": [".git", "node_modules"],
+  "verbose": true,
+  "execMap": {
+    "js": "babel-node src/index.js"
+  }
+}

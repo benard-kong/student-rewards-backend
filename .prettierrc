@@ -1,0 +1,23 @@
+{
+  "arrowParens": "always",
+  "jsxBracketSameLine": true,
+  "overrides": [
+    {
+      "files": ["*.css", "*.scss", "*.sass"],
+      "options": {
+        "singleQuote": true
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "options": {
+        "singleQuote": true
+      }
+    }
+  ],
+  "printWidth": 120,
+  "semi": false,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "useTabs": false
+}

@@ -1,0 +1,138 @@
+{
+  "TodoParser": {
+    "folderExclude": ["node_modules", ".vscode", "build", "release"],
+    "markers": ["NOTICE:", "INFO:", "HOTFIX:", "FIXME:"]
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "bracketPairColorizer.showBracketsInGutter": true,
+  "cSpell.enabledLanguageIds": [
+    "asciidoc",
+    "c",
+    "cpp",
+    "csharp",
+    "css",
+    "go",
+    "handlebars",
+    "html",
+    "jade",
+    "java",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "jsonc",
+    "latex",
+    "less",
+    "markdown",
+    "php",
+    "plaintext",
+    "pug",
+    "python",
+    "restructuredtext",
+    "rust",
+    "scala",
+    "scss",
+    "text",
+    "typescript",
+    "typescriptreact",
+    "yaml",
+    "yml"
+  ],
+  "debug.console.fontSize": 11,
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  "editor.parameterHints.enabled": false,
+  "editor.tabSize": 2,
+  "eslint.alwaysShowStatus": true,
+  "explorer.openEditors.visible": 0,
+  "files.associations": {
+    "*.js": "javascript"
+  },
+  "files.autoSave": "onFocusChange",
+  "files.exclude": {
+    "**/*.css.map": true,
+    "**/*.js.map": true,
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/node_modules": true,
+    ".vscode": true,
+    ".babelrc": true,
+    ".editorconfig": true,
+    ".eslintignore": true,
+    ".prettierignore": true,
+    ".prettierrc": true,
+    ".sass-lint.yml": true,
+    "clocignore": true,
+    "nodemon.json": true,
+    "runcloc.sh": true
+  },
+  "files.insertFinalNewline": true,
+  "html.format.unformatted": "p, h1, h2, h3, h4, h5, a, img",
+  "javascript.format.enable": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+  "liveSassCompile.settings.formats": [
+    {
+      "extensionName": ".css",
+      "format": "nested",
+      "savePath": "/css"
+    }
+  ],
+  "liveServer.settings.CustomBrowser": "chrome",
+  "prettier.jsxBracketSameLine": true,
+  "sasslint.enable": true,
+  "search.exclude": {
+    "**/build": true,
+    "**/index.d.ts": true,
+    "**/node_modules": true,
+    "**/release": true,
+    "package-lock.json": true,
+    "yarn.lock": true
+  },
+  "todohighlight.keywords": [
+    {
+      "backgroundColor": "yellow",
+      "color": "black",
+      "text": "NOTICE:"
+    },
+    {
+      "backgroundColor": "lightyellow",
+      "color": "blue",
+      "text": "INFO:"
+    },
+    {
+      "backgroundColor": "grey",
+      "color": "orange",
+      "overviewRulerColor": "grey",
+      "text": "HOTFIX:"
+    }
+  ],
+  "tslint.autoFixOnSave": true,
+  "typescript.extension.sortImports.enableJavascript": true,
+  "typescript.extension.sortImports.maxNamedImportsInSingleLine": 20,
+  "typescript.extension.sortImports.omitSemicolon": true,
+  "typescript.extension.sortImports.pathSortOrder": ["package", "relativeUpLevel", "relativeDownLevel"],
+  "typescript.extension.sortImports.sortMethod": "path",
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "vsicons.projectDetection.autoReload": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.sideBar.location": "left"
+}
