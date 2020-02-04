@@ -1,5 +1,5 @@
 {
-  "ext": "js, graphql",
+  "ext": "js, graphql, gql",
   "ignore": [".git", "node_modules"],
   "verbose": true,
   "execMap": {
