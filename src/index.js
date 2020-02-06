@@ -1,46 +1,18 @@
+// Server imports
 import { GraphQLServer } from 'graphql-yoga'
+
+// Sequelize imports
 import { models, sequelize } from './models'
 
-/*
-  As these variables get bigger, ideally you'll want to import from external folder called schema
-*/
-const typeDefs = `
-  type User {
-    id: ID!
-    firstName: String!
-    lastName: String
-  }
-  type Query {
-    allUsers: [User]!
-  }
-  type Mutation {
-    createUser(firstName: String!, lastName: String!): User!
-  }
-`
+// Schema Imports
+import typeDefs from './schema'
+import resolvers from './resolvers'
+import { makeExecutableSchema } from 'graphql-tools'
 
-/*
-  As these variables get bigger, ideally you'll want to import from external folder called resolvers
-*/
-const resolvers = {
-  Query: {
-    allUsers: (root, args, context, info) => {
-      const { User } = context.models
+const schema = makeExecutableSchema({ typeDefs, resolvers })
+const context = () => ({ models })
 
-      return User.findAll()
-    },
-  },
-  Mutation: {
-    createUser: async (root, args, context, info) => {
-      const { User } = context.models
-      const { firstName, lastName } = args
-
-      const newUser = await User.create({ firstName, lastName })
-      return newUser
-    },
-  },
-}
-
-const server = new GraphQLServer({ typeDefs, resolvers, context: () => ({ models }) })
+const server = new GraphQLServer({ schema, context })
 
 sequelize.sync({ force: true }).then(async () => {
   await models.User.create({ firstName: 'Jane', lastName: 'Doe' })
