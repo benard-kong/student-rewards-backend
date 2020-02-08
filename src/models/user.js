@@ -1,13 +1,33 @@
 const user = (sequelize, DataTypes) => {
   const User = sequelize.define('user', {
     // the string 'user' is the name of the table in the database
-    firstName: {
+    email: {
       type: DataTypes.STRING,
-      notNull: false, // defaults to true
+      allowNull: false,
+      unique: {
+        msg: 'Email already exists',
+      },
+      validate: {
+        isEmail: {
+          msg: 'Invalid Email',
+        },
+        notNull: {
+          msg: 'Email is required',
+        },
+      },
     },
-    lastName: {
+    password: {
       type: DataTypes.STRING,
-      notNull: false, // defaults to true
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: 'Password is required',
+        },
+        len: {
+          args: [8],
+          msg: 'Password must be >= 8 characters',
+        },
+      },
     },
   })
 

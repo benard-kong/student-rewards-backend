@@ -25,8 +25,8 @@ const options = {
   NOTE: Remove { force: true } in production. force: true will clean out your database each time you start your server
 */
 sequelize.sync({ force: true }).then(async () => {
-  await models.User.create({ firstName: 'Jane', lastName: 'Doe' })
-  await models.User.create({ firstName: 'John', lastName: 'Doe' })
+  await models.User.create({ email: 'jane@doe.com', password: 'hahahaha00' })
+  await models.User.create({ email: 'john@doe.com', password: '1234567890' })
   server.start(options, ({ playground, port }) => {
     console.log(
       `Server is running on localhost:${port}; Navigate to localhost:${port}${playground} for the GraphQL playground`

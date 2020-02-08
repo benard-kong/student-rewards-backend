@@ -9,9 +9,9 @@ export const userResolvers = {
   Mutation: {
     createUser: async (root, args, context, info) => {
       const { User } = context.models
-      const { firstName, lastName } = args
+      const { email, password } = args
 
-      const newUser = await User.create({ firstName, lastName })
+      const newUser = await User.create({ email, password })
       return newUser
     },
   },

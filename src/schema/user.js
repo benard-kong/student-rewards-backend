@@ -4,12 +4,11 @@ export const userSchema = `
   }
 
   extend type Mutation {
-    createUser(firstName: String!, lastName: String!): User!
+    createUser(email: String!, password: String!): User!
   }
 
   type User {
     id: ID!
-    firstName: String!
-    lastName: String!
+    email: String!
   }
 `
