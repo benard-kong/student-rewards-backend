@@ -29,7 +29,7 @@ sequelize.sync({ force: true }).then(async () => {
   await models.User.create({ firstName: 'John', lastName: 'Doe' })
   server.start(options, ({ playground, port }) => {
     console.log(
-      `Server is running on localhost:${port}; Navigate to localhost:${port}/${playground} for the GraphQL playground`
+      `Server is running on localhost:${port}; Navigate to localhost:${port}${playground} for the GraphQL playground`
     )
   })
 })

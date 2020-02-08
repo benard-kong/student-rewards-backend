@@ -48,9 +48,15 @@
 
    8. In the pop up, give the database a name and click on `Save`.
 
-3. Back in the boilerplate code, go to `src/models/index.js` and change the strings inside the `Sequelize` constructor to match your database name, database user, and database password, in that order.
+3. Back in the boilerplate code, create an environment variable file (ie. `.env`) in your root folder, and add the following environment variables:
 
-   - Never store these values inside the code in production. Ideally, you should place those values in environment variables.
+   1. `DB_NAME`
+   2. `DB_USER`
+   3. `DB_PASSWORD`
+   4. `DB_HOST` (optional, you'll likely just use 'localhost' during development)
+   5. `DB_PORT` (optional, you'll likely just use 5432 by default)
+
+   - If you ever forget which environment variables you need, you can look it up in the `src/models/index.js` file.
 
 4. In terminal, run `npm start` and you should be able to start developing!
    - So long as you have the `{ force: true }` option available in `sequelize.sync()`, sequelize should create your database tables for you. It is not a production solution, though. This boilerplate is so you can get development up and running quickly.

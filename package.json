@@ -4,12 +4,13 @@
   "description": "Boilerplate for a quick GraphQL project",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "start": "nodemon -r dotenv/config --exec babel-node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Benard Kong",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "graphql-yoga": "^1.18.3",
     "pg": "^7.18.1",
     "pg-hstore": "^2.3.3",
