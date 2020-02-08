@@ -3,8 +3,12 @@
 ## Linux
 
 1. Install PostgreSQL on your computer
-   `$ sudo apt update`
-   `$ sudo apt install postgresql postgresql-contrib`
+   ```shell
+   $ sudo apt update
+   ```
+   ```shell
+   $ sudo apt install postgresql postgresql-contrib
+   ```
 2. Create and start your database
    You can skip the following instructions if you already know how to create a database with the terminal. The following instructions will show you how to install and run pgAdmin 4 using Python.
 
@@ -27,7 +31,7 @@
       - It may say you don't have permissions, in which case just add `sudo` in front of the command.
       - at this point if you are getting an error that says you don't have a module installed, you can fix this by going into `/path/to/new/virtual/environment/lib/python3.x/site-packages/pgadmin4/pgadmin/__init__.py`, then add the following line of code before the `from flask import ...` line:
         `sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))`
-        - Your `__init__.py` file should look like the following:
+        - Your `__init__.py` file should now look like the following:
 
       ```python
       ...
