@@ -9,8 +9,19 @@ import typeDefs from './schema'
 import resolvers from './resolvers'
 import { makeExecutableSchema } from 'graphql-tools'
 
+// Utils imports
+import { getUser } from './utils/getUser'
+
 const schema = makeExecutableSchema({ typeDefs, resolvers })
-const context = () => ({ models })
+const context = async ({ request, response }) => {
+  const {
+    headers: { authorization },
+  } = request
+
+  if (authorization) return { models, me: await getUser(authorization, models.User) }
+
+  return { models }
+}
 
 const server = new GraphQLServer({ schema, context })
 
