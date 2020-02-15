@@ -1,6 +1,12 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
+export const USER_ROLES = {
+  SUPER: 'SUPER',
+  ADMIN: 'ADMIN',
+  USER: 'USER',
+}
+
 const user = (sequelize, DataTypes) => {
   const User = sequelize.define('user', {
     // the string 'user' is the name of the table in the database
@@ -31,6 +37,12 @@ const user = (sequelize, DataTypes) => {
           msg: 'Password must be >= 8 characters',
         },
       },
+    },
+    role: {
+      type: DataTypes.ENUM({
+        values: [USER_ROLES.SUPER, USER_ROLES.ADMIN, USER_ROLES.USER],
+      }),
+      defaultValue: USER_ROLES.USER,
     },
   })
 

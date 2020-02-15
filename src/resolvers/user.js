@@ -1,14 +1,24 @@
+import { USER_ROLES } from '../models/user'
+
 export const userResolvers = {
   Query: {
-    allUsers: (root, args, context, info) => {
-      const { User } = context.models
-
+    allUsers: (root, args, { models: { User } }, info) => {
       return User.findAll()
+    },
+    findUser: async (root, { email }, { models: { User } }, info) => {
+      const user = await User.findOne({ where: { email } })
+      if (!user) return null
+      return user
     },
   },
   Mutation: {
+    createAdminUser: async (root, { email, password }, { models: { User } }, info) => {
+      const newUser = await User.create({ email, password, role: USER_ROLES.ADMIN })
+      return newUser
+    },
     createUser: async (root, { email, password }, { models: { User } }, info) => {
       const newUser = await User.create({ email, password })
+      if (!newUser) throw new Error('Could not create user')
       return newUser
     },
     login: async (root, { email, password }, { models: { User } }, info) => {
