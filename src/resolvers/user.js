@@ -12,6 +12,16 @@ export const userResolvers = {
     },
   },
   Mutation: {
+    changePassword: async (root, { email, newPassword }, { models: { User } }, info) => {
+      const user = await User.findOne({ where: { email } })
+      try {
+        await user.changePassword(newPassword)
+        user.save()
+        return true
+      } catch (err) {
+        throw new Error(err)
+      }
+    },
     createAdminUser: async (root, { email, password }, { models: { User } }, info) => {
       const newUser = await User.create({ email, password, role: USER_ROLES.ADMIN })
       return newUser

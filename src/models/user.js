@@ -7,6 +7,8 @@ export const USER_ROLES = {
   USER: 'USER',
 }
 
+const passwordMinLength = 8
+
 const user = (sequelize, DataTypes) => {
   const User = sequelize.define('user', {
     // the string 'user' is the name of the table in the database
@@ -33,8 +35,8 @@ const user = (sequelize, DataTypes) => {
           msg: 'Password is required',
         },
         len: {
-          args: [8],
-          msg: 'Password must be >= 8 characters',
+          args: [passwordMinLength],
+          msg: `Password must be ${passwordMinLength} or more characters`,
         },
       },
     },
@@ -51,7 +53,7 @@ const user = (sequelize, DataTypes) => {
   User.customMethod = () => {}
 
   User.beforeCreate(async (user, options) => {
-    user.password = await user.generatePasswordHash()
+    user.password = await user.generatePasswordHash(user.password)
   })
 
   User.checkValidToken = (token) => {
@@ -64,13 +66,18 @@ const user = (sequelize, DataTypes) => {
     return true
   }
 
+  User.prototype.changePassword = async function(newPassword) {
+    if (newPassword.length < passwordMinLength) throw new Error(`Password must be >= ${passwordMinLength} characters`)
+    this.password = await this.generatePasswordHash(newPassword)
+  }
+
   User.prototype.createToken = function() {
     const { id, email } = this
     return jwt.sign({ id, email }, process.env.JWT_SECRET_KEY, { expiresIn: '15m' })
   }
 
-  User.prototype.generatePasswordHash = function() {
-    return bcrypt.hash(this.password, 10)
+  User.prototype.generatePasswordHash = function(plainTextPassword) {
+    return bcrypt.hash(plainTextPassword, 10)
   }
 
   User.prototype.validatePassword = function(inputPassword) {

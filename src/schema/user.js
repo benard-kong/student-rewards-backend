@@ -5,6 +5,7 @@ export const userSchema = `
   }
 
   extend type Mutation {
+    changePassword(email: String!, newPassword: String!): Boolean!
     createAdminUser(email: String!, password: String!): User!
     createUser(email: String!, password: String!): User!
     login(email: String!, password: String!): String!
