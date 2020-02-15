@@ -14,6 +14,11 @@ export const isAdmin = or(
   isSuperUser
 )
 
+export const isOwner = rule({ cache: 'strict' })(async (parent, { email }, { me }, info) => {
+  if (email === me.email) return true
+  return false
+})
+
 export const isAuthenticated = or(
   rule({ cache: 'contextual' })(async (parent, args, { me }, info) => {
     if (me) return true
