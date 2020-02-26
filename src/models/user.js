@@ -71,9 +71,9 @@ const user = (sequelize, DataTypes) => {
     this.password = await this.generatePasswordHash(newPassword)
   }
 
-  User.prototype.createToken = function() {
+  User.prototype.createToken = function(expiresIn = '15m') {
     const { id, email } = this
-    return jwt.sign({ id, email }, process.env.JWT_SECRET_KEY, { expiresIn: '15m' })
+    return jwt.sign({ id, email }, process.env.JWT_SECRET_KEY, { expiresIn })
   }
 
   User.prototype.generatePasswordHash = function(plainTextPassword) {

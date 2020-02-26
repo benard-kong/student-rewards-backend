@@ -55,8 +55,12 @@
    3. `DB_PASSWORD`
    4. `DB_HOST` (optional, you'll likely just use 'localhost' during development)
    5. `DB_PORT` (optional, you'll likely just use 5432 by default)
+   6. `EMAIL_HOST` (For emailing users when they forgot their passwords. ie. smtp.gmail.com)
+   7. `EMAIL_PORT` (ie. 587)
+   8. `EMAIL_ADDRESS`
+   9. `EMAIL_PASSWORD`
 
-   - If you ever forget which environment variables you need, you can look it up in the `src/models/index.js` file.
+- If you ever forget which environment variables you need, you can look it up in the `src/models/index.js` file.
 
 4. In terminal, run `npm start` and you should be able to start developing!
    - So long as you have the `{ force: true }` option available in `sequelize.sync()`, sequelize should create your database tables for you. It is not a production solution, though. This boilerplate is so you can get development up and running quickly.
