@@ -16,6 +16,7 @@ import middlewares from './middleware'
 
 // Utils imports
 import { getUser } from './utils/getUser'
+import schedule from 'node-schedule'
 
 // Create Schema with Middleware
 const schemaWithoutMiddleware = makeExecutableSchema({ typeDefs, resolvers })
@@ -52,4 +53,6 @@ sequelize.sync({ force: true }).then(async () => {
       `Server is running on localhost:${port}; Navigate to localhost:${port}${playground} for the GraphQL playground`
     )
   })
+  // Clean out all users' invalid tokens from tokens blacklist at midnight
+  schedule.scheduleJob('0 0 */1 * *', models.User.cleanTokensBlacklist)
 })
