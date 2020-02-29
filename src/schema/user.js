@@ -11,6 +11,7 @@ export const userSchema = `
     createUser(email: String!, password: String!): User!
     forgotPassword(email: String!): Boolean
     login(email: String!, password: String!): String!
+    logout(token: String!): Boolean!
     resetPassword(email: String!, password: String!, token: String!): String!
   }
 

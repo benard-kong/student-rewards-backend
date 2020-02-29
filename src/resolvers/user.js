@@ -53,6 +53,14 @@ export const userResolvers = {
 
       return user.createToken()
     },
+    logout: async (root, { token }, { me, models: { User } }, info) => {
+      // TODO: Is there a way to take token from the header and pass it here (and only to this resolver)?
+      // That way front end does not need to pass in an argument.
+      const user = await User.findByPk(me.id)
+      if (!user) throw new Error('Error while logging out')
+      await user.logout(token)
+      return true
+    },
     resetPassword: async (root, { email, password, token }, { models: { User } }, info) => {
       const user = await User.findOne({ where: { email } })
       if (!user) throw new Error('Reset password failed')

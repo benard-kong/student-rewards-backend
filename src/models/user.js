@@ -46,6 +46,25 @@ const user = (sequelize, DataTypes) => {
       }),
       defaultValue: USER_ROLES.USER,
     },
+    tokensBlacklist: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      validate: {
+        isValidJwt(newArrayObject) {
+          // **********************************************
+          // Checks if token added to new array is a valid JWT token. If not, throw error and do not save it in the database.
+          // **********************************************
+          if (newArrayObject.length > 0) {
+            const newestToken = newArrayObject[newArrayObject.length - 1]
+            try {
+              jwt.verify(newestToken, process.env.JWT_SECRET_KEY)
+            } catch (e) {
+              throw new Error('Invalid token. Not adding to blacklist.')
+            }
+          }
+        },
+      },
+      defaultValue: [],
+    },
   })
 
   // Custom methods go here (often has Model.associate to teach what models are associated, name
@@ -78,6 +97,11 @@ const user = (sequelize, DataTypes) => {
 
   User.prototype.generatePasswordHash = function(plainTextPassword) {
     return bcrypt.hash(plainTextPassword, 10)
+  }
+
+  User.prototype.logout = async function(token) {
+    this.tokensBlacklist = [...this.tokensBlacklist, token]
+    await this.save()
   }
 
   User.prototype.validatePassword = function(inputPassword) {
