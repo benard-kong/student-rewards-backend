@@ -88,7 +88,7 @@ const user = (sequelize, DataTypes) => {
   User.cleanTokensBlacklist = async () => {
     const allUsers = await User.findAll()
     allUsers.forEach(async (user) => {
-      user.tokensBlacklist = user.tokensBlacklist.filter((token) => {
+      const newTokensBlacklist = user.tokensBlacklist.filter((token) => {
         try {
           jwt.verify(token, process.env.JWT_SECRET_KEY)
           return true
@@ -96,7 +96,10 @@ const user = (sequelize, DataTypes) => {
           return false
         }
       })
-      await user.save()
+      if (newTokensBlacklist.length < user.tokensBlacklist.length) {
+        user.tokensBlacklist = newTokensBlacklist
+        await user.save()
+      }
     })
   }
 
