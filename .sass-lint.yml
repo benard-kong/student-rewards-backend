@@ -1,5 +1,0 @@
-options:
-  merge-default-rules: true
-rules:
-  class-name-format: 0
-  leading-zero: 0
