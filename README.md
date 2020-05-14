@@ -59,6 +59,7 @@
    7. `EMAIL_PORT` (ie. 587)
    8. `EMAIL_ADDRESS`
    9. `EMAIL_PASSWORD`
+   10. `JWT_SECRET_KEY`
 
 - If you ever forget which environment variables you need, you can look it up in the `src/models/index.js` file.
 
