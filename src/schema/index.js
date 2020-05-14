@@ -1,4 +1,5 @@
-import { userSchema } from './user'
+import { userSchema } from "./user";
+import { studentSchema } from "./student";
 
 const linkSchema = `
   type Query {
@@ -12,6 +13,6 @@ const linkSchema = `
   type Subscription {
     _: Boolean!
   }
-`
+`;
 
-export default [linkSchema, userSchema]
+export default [linkSchema, userSchema, studentSchema];
