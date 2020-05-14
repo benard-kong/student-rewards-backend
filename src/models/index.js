@@ -1,20 +1,21 @@
-import { Sequelize } from 'sequelize'
+import { Sequelize } from "sequelize";
 
-const DB_NAME = process.env.DB_NAME
-const DB_USER = process.env.DB_USER
-const DB_PASSWORD = process.env.DB_PASSWORD
-const DB_HOST = process.env.DB_HOST || 'localhost'
-const DB_PORT = process.env.DB_PORT || 5432 // 5432 is default for Postgres
+const DB_NAME = process.env.DB_NAME;
+const DB_USER = process.env.DB_USER;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_HOST = process.env.DB_HOST || "localhost";
+const DB_PORT = process.env.DB_PORT || 5432; // 5432 is default for Postgres
 
 export const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
   port: DB_PORT,
-  dialect: 'postgres',
-})
+  dialect: "postgres",
+});
 
 export const models = {
-  User: sequelize.import('./user.js'),
-}
+  User: sequelize.import("./user.js"),
+  Student: sequelize.import("./student.js"),
+};
 
 /*
   Associate code below is used if you have a custom associate method in your models.
@@ -29,7 +30,7 @@ export const models = {
     }
 */
 Object.keys(models).forEach((key) => {
-  if ('associate' in models[key]) {
-    models[key].associate(models)
+  if ("associate" in models[key]) {
+    models[key].associate(models);
   }
-})
+});
