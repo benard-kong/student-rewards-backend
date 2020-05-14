@@ -1,6 +1,8 @@
 export const studentSchema = `
   extend type Query {
     allStudents: [Student]!
+    allTransactionsByStudent(studentId: ID!): [Transaction]!
+    findStudent(studentId: ID!): Student!
   }
 
   extend type Mutation {
@@ -16,5 +18,14 @@ export const studentSchema = `
     lastName: String!
     numPoints: Int!
     grade: Int
+    transactions: [Transaction]!
+  }
+
+  type Transaction {
+    id: ID!
+    studentName: String!
+    numPoints: Int!
+    createdAt: String!
+    updatedAt: String!
   }
 `;
