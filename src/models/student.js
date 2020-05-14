@@ -54,6 +54,10 @@ const student = (sequelize, DataTypes) => {
     },
   });
 
+  Student.associate = (models) => {
+    Student.hasMany(models.Transaction, { onDelete: "CASCADE" });
+  };
+
   Student.beforeCreate(async (student, options) => {
     student.id = uuid();
   });

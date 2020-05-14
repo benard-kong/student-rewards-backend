@@ -10,11 +10,13 @@ export const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
   port: DB_PORT,
   dialect: "postgres",
+  logging: !process.env.DEV_MODE,
 });
 
 export const models = {
   User: sequelize.import("./user.js"),
   Student: sequelize.import("./student.js"),
+  Transaction: sequelize.import("./studentTransaction.js"),
 };
 
 /*
