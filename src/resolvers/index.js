@@ -1,3 +1,4 @@
-import { userResolvers } from './user'
+import { userResolvers } from "./user";
+import { studentResolvers } from "./student";
 
-export default [userResolvers]
+export default [userResolvers, studentResolvers];
