@@ -35,6 +35,10 @@ const transaction = (sequelize, DataTypes) => {
     await student.save();
   });
 
+  Transaction.newTransaction = async ({ studentId, numPoints, Student }) => {
+    await Transaction.create({ studentId, numPoints }, { Student });
+  };
+
   return Transaction;
 };
 

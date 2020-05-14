@@ -5,5 +5,6 @@ export const StudentQuery = {
 };
 
 export const StudentMutation = {
+  addPoints: rules.isAuthenticated,
   createStudent: rules.isAdmin,
 };
