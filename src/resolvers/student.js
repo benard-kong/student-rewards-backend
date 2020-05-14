@@ -15,5 +15,10 @@ export const studentResolvers = {
       if (!newStudent) throw new Error("Could not create user");
       return newStudent;
     },
+    usePoints: async (root, { studentId, numPoints }, { models: { Student, Transaction } }, info) => {
+      if (numPoints <= 0) throw new Error("Must input a positive number");
+      await Transaction.newTransaction({ studentId, numPoints: -numPoints, Student });
+      return true;
+    },
   },
 };

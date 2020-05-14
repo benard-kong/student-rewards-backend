@@ -6,6 +6,7 @@ export const studentSchema = `
   extend type Mutation {
     addPoints(studentId: ID!, numPoints: Int!): Boolean!
     createStudent(firstName: String!, lastName: String!, studentNumber: String!, grade: Int): Student!
+    usePoints(studentId: ID!, numPoints: Int!): Boolean!
   }
 
   type Student {
