@@ -18,5 +18,6 @@ export const userSchema = `
   type User {
     id: ID!
     email: String!
+    transactions: [Transaction]!
   }
-`
+`;
