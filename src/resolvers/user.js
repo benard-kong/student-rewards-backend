@@ -27,12 +27,12 @@ export const userResolvers = {
 
       return true;
     },
-    createAdminUser: async (root, { email, password }, { models: { User } }, info) => {
-      const newUser = await User.create({ email, password, role: USER_ROLES.ADMIN });
+    createAdminUser: async (root, { email, firstName, lastName, password }, { models: { User } }, info) => {
+      const newUser = await User.create({ email, firstName, lastName, password, role: USER_ROLES.ADMIN });
       return newUser;
     },
-    createUser: async (root, { email, password }, { models: { User } }, info) => {
-      const newUser = await User.create({ email, password });
+    createUser: async (root, { email, firstName, lastName, password }, { models: { User } }, info) => {
+      const newUser = await User.create({ email, firstName, lastName, password });
       if (!newUser) throw new Error("Could not create user");
       return newUser;
     },

@@ -7,8 +7,8 @@ export const userSchema = `
 
   extend type Mutation {
     changePassword(email: String!, newPassword: String!): Boolean!
-    createAdminUser(email: String!, password: String!): User!
-    createUser(email: String!, password: String!): User!
+    createAdminUser(email: String!, password: String!, firstName: String!, lastName: String!): User!
+    createUser(email: String!, password: String!, firstName: String!, lastName: String!): User!
     forgotPassword(email: String!): Boolean
     login(email: String!, password: String!): String!
     logout(token: String!): Boolean!
@@ -18,6 +18,8 @@ export const userSchema = `
   type User {
     id: ID!
     email: String!
+    firstName: String!
+    lastName: String!
     transactions: [Transaction]!
   }
 `;
