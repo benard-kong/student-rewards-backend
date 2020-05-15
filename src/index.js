@@ -47,11 +47,25 @@ const options = {
 */
 sequelize.sync({ force: true }).then(async () => {
   if (process.env.DEV_MODE) {
-    await models.User.create({ email: "jane@doe.com", password: "1234567890" });
-    await models.User.create({ email: "john@doe.com", password: "1234567890", role: USER_ROLES.SUPER });
+    await models.User.create({
+      email: "jane@doe.com",
+      firstName: "Jane S. ",
+      lastName: " Doe ",
+      password: "1234567890",
+    });
+    await models.User.create({
+      email: "john@doe.com",
+      firstName: "John",
+      lastName: "Doe",
+      password: "1234567890",
+      role: USER_ROLES.SUPER,
+    });
     await models.Student.create({ firstName: "A", lastName: "B", studentNumber: "01" });
     const firstStudent = await models.Student.findOne({ where: { studentNumber: "01" } });
-    await models.Transaction.create({ numPoints: 7, studentId: firstStudent.id }, { Student: models.Student });
+    await models.Transaction.create(
+      { numPoints: 7, studentId: firstStudent.id, teacherId: 1 },
+      { Student: models.Student }
+    );
     await models.Student.create({ firstName: "C", lastName: "D", studentNumber: "02" });
     await models.Student.create({ firstName: "E", lastName: "F", studentNumber: "03" });
   }
