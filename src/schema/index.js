@@ -1,5 +1,6 @@
 import { userSchema } from "./user";
 import { studentSchema } from "./student";
+import { transactionSchema } from "./transaction";
 
 const linkSchema = `
   type Query {
@@ -15,4 +16,4 @@ const linkSchema = `
   }
 `;
 
-export default [linkSchema, userSchema, studentSchema];
+export default [linkSchema, userSchema, studentSchema, transactionSchema];

@@ -3,17 +3,15 @@ export const studentResolvers = {
     allStudents: (root, args, { models: { Student } }, info) => {
       return Student.findAll();
     },
-    allTransactionsByStudent: async (root, { studentId }, { models: { Transaction } }, info) => {
-      return Transaction.findAll({ where: { studentId } });
-    },
-    findStudent: async (root, { studentId }, { models: { Student } }, info) => {
+    findStudent: (root, { studentId }, { models: { Student } }, info) => {
       return Student.findByPk(studentId);
     },
   },
   Mutation: {
-    addPoints: async (root, { studentId, numPoints }, { models: { Student, Transaction } }, info) => {
+    addPoints: async (root, { studentId, numPoints }, { me, models: { Student, Transaction } }, info) => {
+      if (!me) throw new Error("Could not find logged in user, please login");
       if (numPoints <= 0) throw new Error("Must input a positive number");
-      await Transaction.newTransaction({ studentId, numPoints, Student });
+      await Transaction.newTransaction({ studentId, teacherId: me.id, numPoints, Student });
       return true;
     },
     createStudent: async (root, { firstName, lastName, studentNumber, grade }, { models: { Student } }, info) => {
@@ -21,24 +19,16 @@ export const studentResolvers = {
       if (!newStudent) throw new Error("Could not create user");
       return newStudent;
     },
-    usePoints: async (root, { studentId, numPoints }, { models: { Student, Transaction } }, info) => {
+    usePoints: async (root, { studentId, numPoints }, { me, models: { Student, Transaction } }, info) => {
+      if (!me) throw new Error("Could not find logged in user, please login");
       if (numPoints <= 0) throw new Error("Must input a positive number");
-      await Transaction.newTransaction({ studentId, numPoints: -numPoints, Student });
+      await Transaction.newTransaction({ studentId, teacherId: me.id, numPoints: -numPoints, Student });
       return true;
     },
   },
   Student: {
-    transactions: async ({ id }, args, { models: { Transaction } }, info) => {
+    transactions: ({ id }, args, { models: { Transaction } }, info) => {
       return Transaction.findAll({ where: { studentId: id } });
-    },
-  },
-  Transaction: {
-    studentName: async ({ studentId }, args, { models: { Student } }, info) => {
-      const student = await Student.findByPk(studentId);
-      if (!student) throw new Error("No student found associated with this transaction");
-      const { firstName, lastName } = student;
-
-      return `${firstName} ${lastName}`.trim();
     },
   },
 };

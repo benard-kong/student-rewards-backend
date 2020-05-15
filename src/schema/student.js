@@ -1,7 +1,6 @@
 export const studentSchema = `
   extend type Query {
     allStudents: [Student]!
-    allTransactionsByStudent(studentId: ID!): [Transaction]!
     findStudent(studentId: ID!): Student!
   }
 
@@ -19,13 +18,5 @@ export const studentSchema = `
     numPoints: Int!
     grade: Int
     transactions: [Transaction]!
-  }
-
-  type Transaction {
-    id: ID!
-    studentName: String!
-    numPoints: Int!
-    createdAt: String!
-    updatedAt: String!
   }
 `;
