@@ -63,7 +63,19 @@ sequelize.sync({ force: true }).then(async () => {
     await models.Student.create({ firstName: "A", lastName: "B", studentNumber: "01" });
     const firstStudent = await models.Student.findOne({ where: { studentNumber: "01" } });
     await models.Transaction.create(
-      { numPoints: 7, studentId: firstStudent.id, teacherId: 1 },
+      { numPoints: 7, studentId: firstStudent.id, teacherId: 1, createdAt: "2020-04-15T03:15:36.512Z" },
+      { Student: models.Student }
+    );
+    await models.Transaction.create(
+      { numPoints: -5, studentId: firstStudent.id, teacherId: 1, createdAt: "2020-05-01T03:15:36.512Z" },
+      { Student: models.Student }
+    );
+    await models.Transaction.create(
+      { numPoints: -1, studentId: firstStudent.id, teacherId: 1, createdAt: "2020-05-02T03:15:36.512Z" },
+      { Student: models.Student }
+    );
+    await models.Transaction.create(
+      { numPoints: 4, studentId: firstStudent.id, teacherId: 1, createdAt: "2020-03-25T03:15:36.512Z" },
       { Student: models.Student }
     );
     await models.Student.create({ firstName: "C", lastName: "D", studentNumber: "02" });
