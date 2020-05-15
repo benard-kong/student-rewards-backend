@@ -1,19 +1,16 @@
-import { shield, and } from "graphql-shield";
-import * as rules from "./rules";
+import { shield } from "graphql-shield";
 import { StudentMutation, StudentQuery } from "./student";
 import { TransactionQuery } from "./transaction";
+import { UserMutation, UserQuery } from "./user";
 
-// All these rules are optional depending on your application
 const Query = {
-  allUsers: rules.isAuthenticated,
-  findUser: rules.isAuthenticated,
+  ...UserQuery,
   ...StudentQuery,
   ...TransactionQuery,
 };
 
 const Mutation = {
-  createAdminUser: rules.isSuperUser,
-  changePassword: and(rules.isAuthenticated, rules.isOwner),
+  ...UserMutation,
   ...StudentMutation,
 };
 
