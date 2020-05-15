@@ -13,8 +13,28 @@ const transaction = (sequelize, DataTypes) => {
     },
     studentId: {
       type: DataTypes.UUID,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Must provide a studentId",
+        },
+      },
       references: {
         model: "students",
+        key: "id",
+      },
+    },
+    teacherId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isInt: true,
+        notNull: {
+          msg: "Must provide a userId",
+        },
+      },
+      references: {
+        model: "users",
         key: "id",
       },
     },
@@ -22,6 +42,7 @@ const transaction = (sequelize, DataTypes) => {
 
   Transaction.associate = (models) => {
     Transaction.belongsTo(models.Student);
+    Transaction.belongsTo(models.User, { foreignKey: "teacherId", targetKey: "id" });
   };
 
   Transaction.beforeCreate(async (transaction, options) => {
@@ -35,8 +56,8 @@ const transaction = (sequelize, DataTypes) => {
     await student.save();
   });
 
-  Transaction.newTransaction = async ({ studentId, numPoints, Student }) => {
-    await Transaction.create({ studentId, numPoints }, { Student });
+  Transaction.newTransaction = async ({ studentId, teacherId, numPoints, Student }) => {
+    await Transaction.create({ studentId, teacherId, numPoints }, { Student });
   };
 
   return Transaction;
