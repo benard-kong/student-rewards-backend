@@ -22,6 +22,9 @@ const student = (sequelize, DataTypes) => {
           notNull: {
             msg: "First name is required",
           },
+          notEmpty: (value) => {
+            if (!value) throw new Error("First name is required");
+          },
         },
       },
       lastName: {
@@ -30,6 +33,9 @@ const student = (sequelize, DataTypes) => {
         validate: {
           notNull: {
             msg: "Last name is required",
+          },
+          notEmpty: (value) => {
+            if (!value) throw new Error("Last name is required");
           },
         },
       },
@@ -42,6 +48,9 @@ const student = (sequelize, DataTypes) => {
         validate: {
           notNull: {
             msg: "Student Number is required",
+          },
+          notEmpty: (value) => {
+            if (!value) throw new Error("Student Number is required");
           },
         },
       },

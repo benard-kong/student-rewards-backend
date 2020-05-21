@@ -36,6 +36,9 @@ const user = (sequelize, DataTypes) => {
           notNull: {
             msg: "First name is required",
           },
+          notEmpty: (value) => {
+            if (!value) throw new Error("First name is required");
+          },
         },
       },
       lastName: {
@@ -44,6 +47,9 @@ const user = (sequelize, DataTypes) => {
         validate: {
           notNull: {
             msg: "Last name is required",
+          },
+          notEmpty: (value) => {
+            if (!value) throw new Error("First name is required");
           },
         },
       },
