@@ -2,7 +2,7 @@ export const userSchema = `
   extend type Query {
     allUsers: [User]!
     checkValidToken(token: String!): Boolean!
-    findUser(email: String!): User
+    findUser(id: ID!): User
   }
 
   extend type Mutation {

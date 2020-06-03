@@ -9,8 +9,8 @@ export const userResolvers = {
     checkValidToken: (root, { token }, { models: { User } }, info) => {
       return User.checkValidToken(token);
     },
-    findUser: async (root, { email }, { models: { User } }, info) => {
-      const user = await User.findOne({ where: { email } });
+    findUser: async (root, { id }, { models: { User } }, info) => {
+      const user = await User.findByPk(id);
       if (!user) return null;
       return user;
     },
