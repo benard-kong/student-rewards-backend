@@ -9,6 +9,7 @@ export const userSchema = `
     changePassword(email: String!, newPassword: String!): Boolean!
     createAdminUser(email: String!, password: String!, firstName: String!, lastName: String!): User!
     createUser(email: String!, password: String!, firstName: String!, lastName: String!): User!
+    editUser(id: ID!, email: String, firstName: String, lastName: String): Boolean!
     forgotPassword(email: String!): Boolean
     login(email: String!, password: String!): String!
     logout(token: String!): Boolean!

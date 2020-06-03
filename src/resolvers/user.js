@@ -36,6 +36,15 @@ export const userResolvers = {
       if (!newUser) throw new Error("Could not create user");
       return newUser;
     },
+    editUser: async (root, { id, email, firstName, lastName }, { models: { User } }, info) => {
+      const user = await User.findByPk(id);
+      if (!user) throw new Error("No user found");
+      user.email = email;
+      user.firstName = firstName;
+      user.lastName = lastName;
+      await user.save();
+      return true;
+    },
     forgotPassword: async (root, { email }, { models: { User } }, info) => {
       const user = await User.findOne({ where: { email } });
       if (user) {
