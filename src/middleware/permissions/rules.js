@@ -14,7 +14,8 @@ export const isAdmin = or(
   isSuperUser
 );
 
-export const isOwner = rule({ cache: "strict" })(async (parent, { email }, { me }, info) => {
+export const isOwner = rule({ cache: "strict" })(async (parent, { id, email }, { me }, info) => {
+  if (id.toString() === me.id.toString()) return true;
   if (email === me.email) return true;
   return false;
 });
