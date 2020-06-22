@@ -1,11 +1,12 @@
 {
-  "name": "graphql-boilerplate",
+  "name": "student-rewards-backend",
   "version": "1.0.0",
-  "description": "Boilerplate for a quick GraphQL project",
+  "description": "Student Rewards Backend",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon -r dotenv/config --exec babel-node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "env NODE_ENV=production babel-node -r dotenv/config src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "env NODE_ENV=development nodemon -r dotenv/config --exec babel-node src/index.js"
   },
   "author": "Benard Kong",
   "license": "ISC",
