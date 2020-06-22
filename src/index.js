@@ -37,7 +37,7 @@ const context = async ({ request, response }) => {
 // Set up server and server options
 const server = new GraphQLServer({ schema, context });
 const options = {
-  port: 8000,
+  port: process.env.PORT || 8000, // INFO: process.env.PORT is for production mode
   endpoint: "/graphql",
   subscriptions: "/subscriptions",
   playground: "/__graphql-playground",
